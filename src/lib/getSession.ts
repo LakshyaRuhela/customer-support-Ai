@@ -9,13 +9,11 @@ export async function getSession() {
   if (!token) {
     return null;
   }
+
   try {
-    // verify token result get the curr user
-    const result: any = await scalekit.validateToken(token!);
-    // console.log(result);
-    // get th euser ID from the scalekit token
-    const user = await scalekit.user.getUser(result.sub);
-    return user; // return user to get user by this function anywhwere
+    const result: any = await scalekit.validateToken(token);
+    const userResponse = await scalekit.user.getUser(result.sub);
+    return userResponse?.user ?? null;
   } catch (err) {
     console.log(err);
     return null;

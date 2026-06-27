@@ -15,8 +15,10 @@ export async function GET(req: NextRequest) {
   // console.log(session.accessToken);
   //   console.log(session);
   // redirect to home after session creating
-  const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
-  
+  const response = NextResponse.redirect(
+    `${process.env.NEXT_PUBLIC_APP_URL}/?auth=1`,
+  );
+
   response.cookies.set("access_token", session.accessToken, {
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000,
