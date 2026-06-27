@@ -1,12 +1,12 @@
-import React from "react";
-
 import NavBar from "./NavBar";
+import { getSession } from "@/lib/getSession";
 
-function HomeClient() {
+async function HomeClient() {
+  const session = await getSession();
+
   return (
     <div className="min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden ">
-        {/* Navbar */}
-        <NavBar/>
+      <NavBar email={session?.user?.email} />
     </div>
   );
 }

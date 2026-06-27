@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   const redirectUri = `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/callback`; // change it to skilkit
   // get session and then store it in cookies
   const session = await scalekit.authenticateWithCode(code, redirectUri);
-
+  // console.log(session.accessToken);
   //   console.log(session);
   // redirect to home after session creating
   const response = NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
