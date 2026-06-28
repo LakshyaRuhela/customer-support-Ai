@@ -16,7 +16,7 @@ function HomeClient({ email: initialEmail }: { email?: string }) {
     }
   }, [router]);
 
-  // function to handle login button
+  // function to handle login button or by axios function call
   const handleLogin = () => {
     window.location.href = "/api/auth/login";
   };
@@ -36,6 +36,9 @@ function HomeClient({ email: initialEmail }: { email?: string }) {
       desc: "Your customers get instant support 24 * 7",
     },
   ];
+
+  // navigate to dashboard
+  const navigate = useRouter();
 
   return (
     <div className="min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden ">
@@ -62,7 +65,10 @@ function HomeClient({ email: initialEmail }: { email?: string }) {
             <div className="mt-10 flex gap-4">
               {/* Get started button */}
               {initialEmail ? (
-                <button className="px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 cursor-pointer transition disabled:opacity-60 ">
+                <button
+                  className="px-7 py-3 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 cursor-pointer transition disabled:opacity-60 "
+                  onClick={() => navigate.push("/dashboard")}
+                >
                   Go to Dashboard
                 </button>
               ) : (

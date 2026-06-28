@@ -1,6 +1,9 @@
 "use client";
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import axios from "axios";
+// import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function NavBar({ email: initialEmail }: { email?: string }) {
   const [email, setEmail] = useState(initialEmail ?? "");
@@ -67,6 +70,19 @@ function NavBar({ email: initialEmail }: { email?: string }) {
 
   const firstLetter = email ? email[0].toUpperCase() : "";
 
+  //  function to handle logout
+  const handleLogout = async () => {
+    try {
+      const result = await axios.get("api/auth/logout");
+      window.location.href = "/";
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Navigator for navigate
+  const navigate = useRouter();
+
   return (
     <motion.div
       className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200 "
@@ -100,11 +116,17 @@ function NavBar({ email: initialEmail }: { email?: string }) {
                   className=" absolute right-0 mt-3 w-44 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden "
                 >
                   {/* dashboard button */}
-                  <button className="w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 cursor-pointer ">
+                  <button
+                    className="w-full text-left px-4 py-3 text-sm hover:bg-zinc-100 cursor-pointer "
+                    onClick={() => navigate.push("/dashboard")}
+                  >
                     Dashboard
                   </button>
                   {/* Logout button */}
-                  <button className="px-4 py-3 text-sm text-red-600 hover:bg-zinc-100 cursor-pointer block ">
+                  <button
+                    className="px-4 py-3 text-sm text-red-600 hover:bg-zinc-100 cursor-pointer block "
+                    onClick={handleLogout}
+                  >
                     Logout
                   </button>
                 </motion.div>
