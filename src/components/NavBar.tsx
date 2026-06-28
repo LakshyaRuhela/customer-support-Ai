@@ -84,7 +84,7 @@ function NavBar({ email: initialEmail }: { email?: string }) {
         {email ? (
           <div className="relative " ref={popupRef}>
             <button
-              className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition "
+              className="w-10 h-10 rounded-full cursor-pointer bg-black text-white flex items-center justify-center font-semibold hover:scale-105 transition "
               onClick={() => setOpen(!open)}
             >
               {firstLetter}
