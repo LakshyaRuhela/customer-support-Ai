@@ -22,13 +22,16 @@ export async function POST(req: NextRequest) {
       {
         new: true,
         upsert: true, // with upsert true if this not exists it create one
+        writeConcern: { w: 1 },
       },
     );
     // return response
     return NextResponse.json(settings);
   } catch (err) {
+    console.error("/api/settings error:", err);
+    const message = err instanceof Error ? err.message : String(err);
     return NextResponse.json(
-      { message: `Settings error , ${err}` },
+      { message: `Settings error: ${message}` },
       { status: 500 },
     );
   }
